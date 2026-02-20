@@ -1,22 +1,19 @@
-name: CI for Develop Branch
+name: CI - Develop
 
 on:
   push:
     branches:
       - develop
-  pull_request:
-    branches:
-      - develop
 
 jobs:
-  build-and-test:
+  build-test:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set up Node.js
+      - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 18
@@ -24,8 +21,8 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Run basic test
-        run: node app.js &
-      
+      - name: Run app test
+        run: node app.js & sleep 5
+
       - name: Build Docker image
         run: docker build -t hello-devops:ci .
