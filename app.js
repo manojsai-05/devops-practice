@@ -1,12 +1,20 @@
-const http = require('http');
+const express = require("express");
 
+const app = express();
 const PORT = 3000;
 
-const server = http.createServer((req, res) => {
-  res.writeHead(200, { "Content-Type": "text/plain" });
-  res.end("Hello DevOps 🚀 App is running!");
+app.get("/", (req, res) => {
+  res.send("Backend is running 🚀");
 });
 
-server.listen(PORT, () => {
+app.get("/api/hello", (req, res) => {
+  res.json({
+    message: "Hello from DevOps CI/CD pipeline",
+    environment: "UAT",
+    status: "success"
+  });
+});
+
+app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });

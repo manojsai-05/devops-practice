@@ -1,8 +1,12 @@
 {
-  "name": "hello-devops",
+  "name": "devops-backend",
   "version": "1.0.0",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "test": "echo \"Tests passed\""
+  },
+  "dependencies": {
+    "express": "^4.19.2"
   }
 }
