@@ -6,6 +6,10 @@ services:
     container_name: hello-backend
     ports:
       - "3000:3000"
+    environment:
+      - NODE_ENV=uat
+    depends_on:
+      - redis
 
   redis:
     image: redis:7
