@@ -1,0 +1,12 @@
+version: "3.9"
+
+services:
+  backend:
+    build: .
+    container_name: hello-backend
+    ports:
+      - "3000:3000"
+
+  redis:
+    image: redis:7
+    container_name: hello-redis

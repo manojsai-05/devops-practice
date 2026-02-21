@@ -1,4 +1,4 @@
-name: CI - Develop
+name: Local CI/CD – Develop
 
 on:
   push:
@@ -6,23 +6,21 @@ on:
       - develop
 
 jobs:
-  build-test:
-    runs-on: ubuntu-latest
+  build-test-deploy:
+    runs-on: self-hosted   # ⭐ THIS MAKES IT RUN ON YOUR SYSTEM
 
     steps:
-      - name: Checkout
+      - name: Checkout code
         uses: actions/checkout@v4
-
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18
 
       - name: Install dependencies
         run: npm install
 
-      - name: Run app test
-        run: node app.js & sleep 5
+      - name: Run basic tests
+        run: npm test
 
-      - name: Build Docker image
-        run: docker build -t hello-devops:ci .
+      - name: Stop old containers
+        run: docker compose down || true
+
+      - name: Build & run containers
+        run: docker compose up -d --build
