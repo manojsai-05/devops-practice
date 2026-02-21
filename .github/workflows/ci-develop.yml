@@ -7,7 +7,7 @@ on:
 
 jobs:
   build-test-deploy:
-    runs-on: self-hosted   # ⭐ THIS MAKES IT RUN ON YOUR SYSTEM
+    runs-on: self-hosted
 
     steps:
       - name: Checkout code
@@ -20,7 +20,8 @@ jobs:
         run: npm test
 
       - name: Stop old containers
-        run: docker compose down || true
+        run: docker compose down
+        continue-on-error: true
 
       - name: Build & run containers
         run: docker compose up -d --build
